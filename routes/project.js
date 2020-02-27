@@ -10,34 +10,34 @@ const project = express.Router();
 project.get("/", async (req, res) => {
   const project = await Project.find().sort({ projectName: 1 });
   res.send(project);
-  console.log("all the project", project);
 });
 
 project.get("/:id", async (req, res) => {
   console.log(req.params.id, "hoiiiiii kinjal");
-  const project = await Project.find({ _id: req.params.id }).sort({ firstName: 1 });
+  const project = await Project.find({ _id: req.params.id }).sort({
+    firstName: 1
+  });
   res.send(project);
-  console.log("all the project", project);
 });
 
 //post the projects
-
 project.post("/", async (req, res) => {
   const { error } = validationSchema(req.body);
-  
+
   if (error) {
     return res.status(400).send(error.details[0].message);
   }
- try {
+
+  try {
     const obj = {
-        projectName:req.body.projectName,
-        projectDetails: req.body.projectDetails
+      projectName: req.body.projectName,
+      projectDetails: req.body.projectDetails
     };
-    console.log("hiii    " ,obj)
+
     var result = await createProject(obj);
     res.send(result);
   } catch (error) {
-    console.log(error,"errororrr");
+    console.log(error, "errororrr");
   }
 });
 
@@ -60,7 +60,6 @@ project.put("/:id", async (req, res) => {
 
 // //delete the project
 project.delete("/:id", async (req, res) => {
-  console.log(req.params.id)
   const id = req.params.id;
   const project = await Project.findByIdAndRemove(id);
   res.send(`delete suceesfully, ${project}`);

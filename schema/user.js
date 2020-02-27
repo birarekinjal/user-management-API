@@ -1,5 +1,5 @@
 import Joi from "@hapi/joi";
-import {projectSchema} from '../schema/project';
+import { projectSchema } from "../schema/project";
 const mongoose = require("mongoose");
 
 //This code for mongoose validation check

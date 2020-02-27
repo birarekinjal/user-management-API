@@ -1,5 +1,4 @@
 const express = require("express");
-const Joi = require('@hapi/joi');
 
 //file path
 const connection = require("./connectionSettings/connection");

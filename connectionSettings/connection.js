@@ -1,4 +1,8 @@
 const mongoose = require('mongoose');
+var Fawn = require("fawn");
+
+
+Fawn.init(mongoose);
 const express = require('express');
 const connection = express.Router();
 

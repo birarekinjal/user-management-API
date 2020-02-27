@@ -2,19 +2,24 @@
 import { createUser } from "../api/user";
 import User from "../model/user";
 import { validationSchema } from "../schema/user";
+import Project from "../model/project";
 
 const express = require("express");
 const user = express.Router();
 
 //get the user
 user.get("/", async (req, res) => {
-  const user = await User.find().sort({ firstName: 1 });
+  const user = await User.find().populate(
+    "project",
+    "projectName projectDetails"
+  );
+
   res.send(user);
+
   console.log("all the User", user);
 });
 
 user.get("/:id", async (req, res) => {
-  console.log(req.params.id, "hoiiiiii kinjal");
   const user = await User.find({ _id: req.params.id }).sort({ firstName: 1 });
   res.send(user);
   console.log("all the User", user);
@@ -23,6 +28,7 @@ user.get("/:id", async (req, res) => {
 //post the users
 
 user.post("/", async (req, res) => {
+  // console.log(req.body)
   const { error } = validationSchema(req.body);
   if (error) {
     return res.status(400).send(error.details[0].message);
@@ -40,7 +46,13 @@ user.post("/", async (req, res) => {
       phoneNumber: req.body.phoneNumber,
       emailAddress: req.body.emailAddress
     };
-    var result = await createUser(obj);
+    var result = await createUser(
+      obj,
+      new Project({
+        projectName: req.body.project,
+        projectDetails: req.body.projectDetails
+      })
+    );
     res.send(result);
   } catch (error) {
     console.log(error);

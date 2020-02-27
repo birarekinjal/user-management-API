@@ -1,5 +1,5 @@
 import Joi from "@hapi/joi";
-
+import {projectSchema} from '../schema/project';
 const mongoose = require("mongoose");
 
 //This code for mongoose validation check
@@ -11,8 +11,7 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: function() {
       return this.firstName;
-    },
-   
+    }
   },
   preferredFullName: String,
   employeeCode: String,
@@ -21,7 +20,8 @@ const userSchema = new mongoose.Schema({
     type: Number,
     required: true
   },
-  emailAddress: String
+  emailAddress: String,
+  project: projectSchema
 });
 
 //This code for "JOI" Validations check
@@ -35,8 +35,9 @@ const validationSchema = users => {
     employeeCode: Joi.string().required(),
     region: Joi.string().required(),
     phoneNumber: Joi.number().required(),
-    emailAddress: Joi.string().required()
-  });
+    emailAddress: Joi.string().required(),
+    project: Joi.string()
+  }).unknown();
   return schema.validate(users);
 };
 

@@ -5,6 +5,11 @@ import { validationSchema } from "../schema/user";
 import Project from "../model/project";
 
 const express = require("express");
+const mongoose = require('mongoose');
+
+//var Fawn = require("fawn");
+//var task = Fawn.Task();
+
 const user = express.Router();
 
 //get the user
@@ -13,16 +18,13 @@ user.get("/", async (req, res) => {
     "project",
     "projectName projectDetails"
   );
-
   res.send(user);
 
-  console.log("all the User", user);
 });
 
 user.get("/:id", async (req, res) => {
   const user = await User.find({ _id: req.params.id }).sort({ firstName: 1 });
   res.send(user);
-  console.log("all the User", user);
 });
 
 //post the users
@@ -33,8 +35,7 @@ user.post("/", async (req, res) => {
   if (error) {
     return res.status(400).send(error.details[0].message);
   }
-
-  try {
+ try {
     const obj = {
       userId: req.body.userId,
       jobTitleName: req.body.jobTitleName,

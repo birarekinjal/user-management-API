@@ -1,8 +1,5 @@
 const mongoose = require('mongoose');
-var Fawn = require("fawn");
 
-//add the Transactions in MongoDB
-Fawn.init(mongoose);
 const express = require('express');
 const connection = express.Router();
 

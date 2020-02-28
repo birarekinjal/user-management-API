@@ -4,12 +4,12 @@ const mongoose = require("mongoose");
 
 //This code for mongoose validation check
 const userSchema = new mongoose.Schema({
-  userId: { type: String, required: true },
-  jobTitleName: { type: String, required: true },
+  userId: {type: String, required: true },
+  jobTitleName: {type: String, required: true },
   firstName: String,
   lastName: {
     type: String,
-    required: function() {
+    required: function(){
       return this.firstName;
     }
   },
@@ -21,7 +21,7 @@ const userSchema = new mongoose.Schema({
     required: true
   },
   emailAddress: String,
-  project: projectSchema
+  //project: projectSchema
 });
 
 //This code for "JOI" Validations check
@@ -36,7 +36,7 @@ const validationSchema = users => {
     region: Joi.string().required(),
     phoneNumber: Joi.number().required(),
     emailAddress: Joi.string().required(),
-    project: Joi.string()
+   // project: Joi.string()
   }).unknown();
   return schema.validate(users);
 };

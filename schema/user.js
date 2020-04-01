@@ -21,6 +21,7 @@ const userSchema = new mongoose.Schema({
     required: true
   },
   emailAddress: String,
+  password:String,
   //project: projectSchema
 });
 
@@ -36,6 +37,7 @@ const validationSchema = users => {
     region: Joi.string().required(),
     phoneNumber: Joi.number().required(),
     emailAddress: Joi.string().required(),
+    password : Joi.string().required(),
    // project: Joi.string()
   }).unknown();
   return schema.validate(users);

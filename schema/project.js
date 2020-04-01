@@ -10,7 +10,6 @@ const projectSchema = new mongoose.Schema({
 
 //This code for "JOI" Validations check
 const validationSchema = project => {
-  console.log("hiiiii");
   const schema = Joi.object({
     projectName: Joi.string().required(),
     projectDetails: Joi.string().required()

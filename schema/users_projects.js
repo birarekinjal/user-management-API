@@ -1,22 +1,28 @@
 import Joi from "@hapi/joi";
-Joi.objectId = require('joi-objectid')(Joi)
+Joi.objectId = require('joi-objectid')(Joi);
+
+
 const mongoose = require("mongoose");
 
-const users_projects = new mongoose({
+
+import Project from "../model/project";
+import User from "../model/user";
+
+const users_projects = new mongoose.Schema({
     user_id:{
          type:mongoose.Schema.Types.ObjectId,
-         ref:'users'
-    } ,
+         ref:User
+    },
     project_id:{
         type:mongoose.Schema.Types.ObjectId,
-        ref:'projects'
+        ref:Project
     }
 })
 
 const validationSchema = data => {
     const schema = Joi.object({
-      userId:Joi.objectId().require(),
-      project:Joi.objectId().require(),
+      userId:Joi.objectId(),
+      projectId:Joi.objectId(),
     }).unknown();
     return schema.validate(data);
   };

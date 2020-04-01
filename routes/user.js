@@ -30,12 +30,14 @@ user.get("/:id", async (req, res) => {
 //post the users
 
 user.post("/", async (req, res) => {
-  // console.log(req.body)
+   console.log(req.body)
   const { error } = validationSchema(req.body);
   if (error) {
     return res.status(400).send(error.details[0].message);
   }
- try {
+  var data = User.findOne({emailAddress : req.body,emailAddress});
+  if (data) return res.status(400).send('user already register')
+  try {
     const obj = {
       userId: req.body.userId,
       jobTitleName: req.body.jobTitleName,
@@ -45,7 +47,8 @@ user.post("/", async (req, res) => {
       employeeCode: req.body.employeeCode,
       region: req.body.region,
       phoneNumber: req.body.phoneNumber,
-      emailAddress: req.body.emailAddress
+      emailAddress: req.body.emailAddress,
+      password : req.body.password
     };
     var result = await createUser(
       obj,
@@ -54,6 +57,9 @@ user.post("/", async (req, res) => {
         projectDetails: req.body.projectDetails
       })
     );
+
+    console.log(result)
+    result.save()
     res.send(result);
   } catch (error) {
     console.log(error);
@@ -74,6 +80,7 @@ user.put("/:id", async (req, res) => {
     },
     { new: true }
   );
+  user.save()
   res.send("update user sucesfulyy");
 });
 

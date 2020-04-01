@@ -8,11 +8,13 @@ const mongoose = require('mongoose');
 // Fawn.init(mongoose);
 
 async function createUser(obj,projectDetails) {
+  console.log(obj , "++++")
   const user = new User({
     ...obj,
     project: {...projectDetails}
   });
-   return result;
+  console.log(user , "hii ")
+   return user;
 }
 
 export { createUser };

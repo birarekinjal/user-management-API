@@ -1,7 +1,9 @@
 import Joi from "@hapi/joi";
 import { projectSchema } from "../schema/project";
-const mongoose = require("mongoose");
 
+const mongoose = require("mongoose");
+var jwt = require('jsonwebtoken');
+const config = require('config');
 //This code for mongoose validation check
 const userSchema = new mongoose.Schema({
   userId: {type: String, required: true },
@@ -24,6 +26,14 @@ const userSchema = new mongoose.Schema({
   password:String,
   //project: projectSchema
 });
+
+
+//for generate the schemas
+userSchema.methods.generateAuthTocken = function (){
+  const token = jwt.sign({_id : userSchema._id},config.get('jwtPrivateKey'));
+  return token;
+}
+
 
 //This code for "JOI" Validations check
 const validationSchema = users => {

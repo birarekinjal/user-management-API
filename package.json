@@ -37,7 +37,7 @@
     "start": "node server.js"
   },
   "engines": {
-    "node": "13.0.9"
+    "node": "6.11.1"
   },
   "keywords": [],
   "author": "",

@@ -27,7 +27,7 @@ userLogin.post("/", async (req, res) => {
 
     const token = user.generateAuthTocken();
    
-    res.send({"tocken":token});
+    res.send({"token":token});
 
   } catch (ex) {
     console.log(ex);

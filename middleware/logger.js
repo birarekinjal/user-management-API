@@ -3,7 +3,7 @@ function log(req, res, next) {
     next();
   }
 function authentication(req, res, next) {
-    console.log("autotication");
+    console.log("Authentication");
     next();
   }
 

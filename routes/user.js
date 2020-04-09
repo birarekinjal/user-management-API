@@ -4,6 +4,7 @@ import User from "../model/user";
 import { validationSchema , userSchema } from "../schema/user";
 import Project from "../model/project";
 import auth from "../middleware/auth";
+import asyncMiddleware from "../middleware/async";
 
 const express = require("express");
 const mongoose = require("mongoose");
@@ -18,17 +19,17 @@ const user = express.Router();
 
 //get the user
 
-user.get('/me' ,auth, async (req, res) => {
+user.get('/me' , auth, async (req, res) => {
   const user = await User.findById(req.user.id);
   res.send(user);
 });
 
-user.get("/", auth, async (req, res) => {
-  const user = await User.find().populate(
-    "project",
-    "projectName projectDetails"
-  );
-  res.send(user);
+user.get("/", async (req, res) => {
+   const user5 = await User.find().populate(
+      "project",
+      "projectName projectDetails"
+    );
+    res.send(user);
 });
 
 user.get("/:id", async (req, res) => {
@@ -47,7 +48,7 @@ user.post("/", async (req, res) => {
   var data = await User.findOne({ emailAddress: req.body.emailAddress });
 
   if (data && data.length > 0) {
-    return res.status(400).send("user already register");
+    return res.status(400).send("User already registered");
   } else {
     try {
       const obj = {
@@ -98,7 +99,7 @@ user.put("/:id", async (req, res) => {
     { new: true }
   );
   user.save();
-  res.send("update user sucesfulyy");
+  res.send("Update user successfully");
 });
 
 // //delete the user

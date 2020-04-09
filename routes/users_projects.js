@@ -8,7 +8,6 @@ const userProject = express.Router();
 
 //get the user
 userProject.get("/:user_id/project/:project_id", async (req, res) => {
-  console.log(req.params)
   const user = await User_Project.find({ user_id: req.params.user_id ,project_id : req.params.project_id})
   res.send(user);
 });
@@ -37,7 +36,7 @@ userProject.post("/:id/project/:id", async (req, res) => {
     result.save();
     res.send(result);
   } catch (error) {
-    console.log(error, "hi");
+    console.log(error);
   }
 });
 
@@ -53,7 +52,7 @@ userProject.put("/:id/project", async (req, res) => {
     },
     { new: true }
   );
-  res.send("update user sucesfulyy");
+  res.send("Update user successfully");
 });
 
 
@@ -62,7 +61,7 @@ userProject.put("/:id/project", async (req, res) => {
 userProject.delete("/:id/project", async (req, res) => {
   const id = req.params.id;
   const user = await User_Project.findByIdAndRemove(id);
-  res.send(`delete suceesfully, ${user}`);
+  res.send(`Delete successfully, ${user}`);
 });
 
 module.exports = userProject;

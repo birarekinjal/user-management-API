@@ -13,7 +13,6 @@ project.get("/", async (req, res) => {
 });
 
 project.get("/:id", async (req, res) => {
-  console.log(req.params.id, "hoiiiiii kinjal");
   const project = await Project.find({ _id: req.params.id }).sort({
     firstName: 1
   });
@@ -37,7 +36,7 @@ project.post("/", async (req, res) => {
     var result = await createProject(obj);
     res.send(result);
   } catch (error) {
-    console.log(error, "errororrr");
+    console.log(error);
   }
 });
 
@@ -62,7 +61,7 @@ project.put("/:id", async (req, res) => {
 project.delete("/:id", async (req, res) => {
   const id = req.params.id;
   const project = await Project.findByIdAndRemove(id);
-  res.send(`delete suceesfully, ${project}`);
+  res.send(`Delete successfully, ${project}`);
 });
 
 module.exports = project;

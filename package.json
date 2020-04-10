@@ -1,7 +1,6 @@
 {
   "name": "mongodb-demo",
   "version": "1.0.0",
-  "description": "",
   "main": "index.js",
   "dependencies": {
     "@babel/preset-react": "^7.8.3",
@@ -34,12 +33,21 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js"
+    "start": "npm install && node server.js"
   },
   "engines": {
-    "node": "6.11.1"
+    "node": "13.9.x"
   },
   "keywords": [],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/birarekinjal/user-management-API.git"
+  },
+  "bugs": {
+    "url": "https://github.com/birarekinjal/user-management-API/issues"
+  },
+  "homepage": "https://github.com/birarekinjal/user-management-API#readme",
+  "description": ""
 }

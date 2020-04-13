@@ -12,6 +12,9 @@ const userLogin = require("./routes/userLogin");
 const error = require("./middleware/error");
 const bodyParser = require("body-parser");
 const config = require('config');
+require('dotenv').config({path: './variable.env'});
+
+
 
 const app = express();
 app.use(express.json());
@@ -41,4 +44,10 @@ require('./middleware/production')(app);
 app.use(error);
 
 //connect to port
-app.listen(5000);
+
+const host = process.env.HOST || '0.0.0.0';
+const port  = process.env.PORT || 3000;
+
+app.listen(port,host,() => {
+    console.log("hjjiiii")
+});

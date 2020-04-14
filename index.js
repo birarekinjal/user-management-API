@@ -2,6 +2,7 @@ const express = require("express");
 require('express-async-errors');
 
 //file path
+require('dotenv').config({path: './variable.env'});
 const winston = require('winston');
 const LogzioWinstonTransport = require('winston-logzio');
 const connection = require("./connectionSettings/connection");
@@ -12,7 +13,7 @@ const userLogin = require("./routes/userLogin");
 const error = require("./middleware/error");
 const bodyParser = require("body-parser");
 const config = require('config');
-require('dotenv').config({path: './variable.env'});
+
 
 
 
@@ -48,6 +49,6 @@ app.use(error);
 const host = process.env.HOST || '0.0.0.0';
 const port  = process.env.PORT || 3000;
 
-app.listen(port,host,() => {
-    console.log("hjjiiii")
-});
+var port = process.env.PORT || 3000
+app.listen(port)
+

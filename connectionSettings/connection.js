@@ -4,7 +4,7 @@ const express = require('express');
 const connection = express.Router();
 
 
-require('dotenv').config({path: 'variable.env'});
+require('dotenv').config();
 console.log(process.env.DB_URL);
 
 mongoose.connect(process.env.DB_URL,{ useNewUrlParser: true, useUnifiedTopology: true })

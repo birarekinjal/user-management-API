@@ -2,7 +2,7 @@ const express = require("express");
 require('express-async-errors');
 
 //file path
-const dotenv = require('dotenv').config({path: './variable.env'});
+const dotenv = require('dotenv').config();
 const winston = require('winston');
 const LogzioWinstonTransport = require('winston-logzio');
 const connection = require("./connectionSettings/connection");

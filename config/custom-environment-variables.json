@@ -1,4 +1,3 @@
 {
-    "jwtPrivateKey" : "UMA_jwtPrivateKey",
-    "db" : "user-management"
+    "jwtPrivateKey" : "UMA_jwtPrivateKey"
 }
